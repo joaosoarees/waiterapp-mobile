@@ -11,7 +11,7 @@ export const categories = [
   },
   {
     '_id': '646990dceee9325fee4642f7',
-    'name': 'Hamburgueres',
+    'name': 'Burguers',
     'icon': '🍔',
   },
   {
