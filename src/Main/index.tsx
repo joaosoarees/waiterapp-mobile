@@ -2,6 +2,7 @@ import { Button } from '../components/Button';
 import { Categories } from '../components/Categories';
 import { Header } from '../components/Header';
 import { Menu } from '../components/Menu';
+import { TableModal } from '../components/TableModal';
 
 import {
   Container,
@@ -33,6 +34,8 @@ export function Main() {
           </Button>
         </FooterContainer>
       </Footer>
+
+      <TableModal />
     </>
   );
 }
