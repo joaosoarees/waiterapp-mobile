@@ -6,33 +6,59 @@ import { Overlay, ModalBody, Header, Form, Input } from './styles';
 
 import { Close } from '../Icons/Close';
 import { Button } from '../Button';
+import { useState } from 'react';
 
-export function TableModal() {
+type TableModalProps = {
+  visible: boolean;
+  onClose: () => void;
+  onSave: (table: string) => void;
+}
+
+export function TableModal({ visible, onClose, onSave }: TableModalProps) {
+  const [table, setTable] = useState('');
+
+  function handleSave() {
+    setTable('');
+    onSave(table);
+    onClose();
+  }
+
+  function handleClose() {
+    onClose();
+    setTable('');
+  }
+
   return (
     <Modal
+      visible={visible}
       transparent
+      animationType="fade"
     >
       <Overlay behavior={Platform.OS === 'android' ? 'height' : 'padding'}>
         <ModalBody>
           <Header>
             <Text weight='600'>Informe a mesa</Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={handleClose}>
               <Close color='#666' />
             </TouchableOpacity>
           </Header>
 
           <Form>
             <Input
+              value={table}
               placeholder='Número da mesa'
               placeholderTextColor="#666"
               keyboardType='number-pad'
+              onChangeText={setTable}
             />
 
-            <Button onPress={() => alert('Salvou')}>
+            <Button
+              onPress={handleSave}
+              disabled={table.length === 0}
+            >
               Salvar
             </Button>
           </Form>
-
         </ModalBody>
       </Overlay>
     </Modal>
